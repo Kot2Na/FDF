@@ -16,6 +16,12 @@
 # include "libft.h"
 # include "mlx.h"
 
+typedef struct		s_lst
+{
+	char			*data;
+	struct s_lst	*next;
+}					t_lst;
+
 typedef struct  s_point
 {
     int         x;
@@ -26,7 +32,7 @@ typedef struct  s_point
 
 typedef struct  s_map
 {
-    int         wight;
+    int         width;
     int         height;
     t_point     **points;
 }               t_map;
@@ -36,5 +42,11 @@ typedef struct  s_main
 {
     t_map       map;
 }               t_main;
+
+void			lst_to_end(t_lst **head, t_lst *new);
+t_lst			*lst_new(char *content);
+void			lst_del(t_lst *head);
+char			**cnvrt_to_arr(t_lst *list);
+int				count_list(t_lst *list);
 
 #endif
