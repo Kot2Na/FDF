@@ -14,5 +14,27 @@
 # define FDF_H
 
 # include "libft.h"
+# include "mlx.h"
+
+typedef struct  s_point
+{
+    int         x;
+    int         y;
+    int         z;
+    int         color;
+}               t_point;
+
+typedef struct  s_map
+{
+    int         wight;
+    int         height;
+    t_point     **points;
+}               t_map;
+
+
+typedef struct  s_main
+{
+    t_map       map;
+}               t_main;
 
 #endif
