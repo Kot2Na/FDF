@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 		print_error("Cannot open the file\n", 2);
 	if (!read_map(&fdf.map, fd))
 		print_error("Input file is invalid\n", 2);
-		
+	close(fd);
 	ft_putstr("anime top\n");
 	return (0);
 }

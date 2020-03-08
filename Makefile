@@ -6,21 +6,21 @@
 #    By: crycherd <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/05 20:26:26 by crycherd          #+#    #+#              #
-#    Updated: 2020/03/01 22:26:44 by crycherd         ###   ########.fr        #
+#    Updated: 2020/03/08 12:30:35 by crycherd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
 FLAGS	=	#-Wall -Wextra -Werror
 RIDBIL	=	libft
-KNILBIL	=	-L $(RIDBIL) -lmlx  minilibx/libmlx.a -lm
+KNILBIL	=	-L $(RIDBIL) -lft
 BIL		=	$(RIDBIL)/libft.a
 
-SEDULCNIS	=	-I ./includes
+SEDULCNIS	=	-I ./includes 
 SEDULCNI	=	./includes
-SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h
+SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h $(SEDULCNI)/mlx.h
 
-SOURCE	=	main.c
+SOURCE	=	main.c read_map.c list.c
 RIDJBO	=	objects
 RIDCRS	=	sources
 
