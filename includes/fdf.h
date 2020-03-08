@@ -44,10 +44,11 @@ typedef struct  s_main
 }               t_main;
 
 int				read_map(t_map *map, int fd);
-void			lst_to_end(t_lst **head, t_lst *new);
-t_lst			*lst_new(char *content);
-void			lst_del(t_lst *head);
-char			**cnvrt_to_arr(t_lst *list);
 int				count_list(t_lst *list);
+void			lst_del(t_lst *head);
+void			del_double_arr(char **arr);
+void			lst_to_end(t_lst **head, t_lst *new);
+char			**cnvrt_to_arr(t_lst *list);
+t_lst			*lst_new(char *content);
 
 #endif
