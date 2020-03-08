@@ -46,19 +46,15 @@ int	check_line(char *line)
 	return (result);
 }
 
-int read_map(t_map *map, int fd)
+int create_list(t_lst **list, t_map *map, int fd)
 {
-	t_lst	*list;
 	char	*line;
 
-	list = NULL;
-	map->width = 0;
 	while (get_next_line(fd, &line))
 	{
 		if (!check_line(line))
 		{
 			free(line);
-			lst_del(list);
 			return(0);
 		}
 		if (map->width == 0)
@@ -66,11 +62,24 @@ int read_map(t_map *map, int fd)
 		else if (map->width != ft_count_wrd(line, ' '))
 		{
 			free(line);
-			lst_del(list);
 			return (0);
 		}
-		lst_to_end(&list, lst_new(line));
+		lst_to_end(list, lst_new(line));
 		free(line);
+	}
+	return (1);
+}
+
+int read_map(t_map *map, int fd)
+{
+	t_lst	*list;
+
+	list = NULL;
+	map->width = 0;
+	if (!create_list(&list, map, fd))
+	{
+		lst_del(list);
+		return(0);
 	}
 	map->height = count_list(list);
 	if (map->height == 0 || !(fill_map(map, list)))
