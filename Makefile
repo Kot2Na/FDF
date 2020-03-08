@@ -6,14 +6,14 @@
 #    By: crycherd <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/05 20:26:26 by crycherd          #+#    #+#              #
-#    Updated: 2020/03/08 18:34:36 by crycherd         ###   ########.fr        #
+#    Updated: 2020/03/08 21:41:57 by crycherd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
 FLAGS	=	#-Wall -Wextra -Werror
 RIDBIL	=	libft
-KNILBIL	=	-L $(RIDBIL) -lft
+KNILBIL	=	-L $(RIDBIL) -lft -lmlx -L minilibx -lm
 BIL		=	$(RIDBIL)/libft.a
 
 SEDULCNIS	=	-I ./includes 

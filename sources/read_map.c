@@ -8,7 +8,7 @@ void	del_double_arr(char **arr)
 	if (arr)
 	{
 		while (arr[i])
-		{	
+		{
 			free(arr[i]);
 			i++;
 		}

@@ -16,6 +16,9 @@
 # include "libft.h"
 # include "mlx.h"
 
+# define WIDTH 400
+# define HEIGHT 200
+
 typedef struct		s_lst
 {
 	char			*data;
@@ -40,12 +43,15 @@ typedef struct  s_map
 
 typedef struct  s_main
 {
+	void		*mlx;
+	void		*win;
     t_map       map;
 }               t_main;
 
 int				read_map(t_map *map, int fd);
 int				count_list(t_lst *list);
 int				fill_map(t_map *map, t_lst *list);
+void			init_struct(t_main *fdf);
 void			remove_points(t_map *map);
 void			lst_del(t_lst *head);
 void			del_double_arr(char **arr);

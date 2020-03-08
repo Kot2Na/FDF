@@ -30,6 +30,8 @@ int	main(int ac, char **av)
 	if (!read_map(&fdf.map, fd))
 		print_error("Input file is invalid\n", 2);
 	close(fd);
+	init_struct(&fdf);
+	mlx_loop((&fdf)->mlx);
 	remove_points(&fdf.map);
 	ft_putstr("anime top\n");
 	return (0);
