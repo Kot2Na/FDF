@@ -45,6 +45,8 @@ typedef struct  s_main
 
 int				read_map(t_map *map, int fd);
 int				count_list(t_lst *list);
+int				fill_map(t_map *map, t_lst *list);
+void			remove_points(t_map *map);
 void			lst_del(t_lst *head);
 void			del_double_arr(char **arr);
 void			lst_to_end(t_lst **head, t_lst *new);

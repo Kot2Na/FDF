@@ -1,4 +1,5 @@
 #include "fdf.h"
+#include <stdio.h>
 
 int compare_with_max(char *str)
 {
@@ -43,6 +44,7 @@ void remove_points(t_map *map)
 	y = 0;
 	if (map)
 	{
+		points = map->points;
 		while (y < map->height)
 		{
 			free(points[y]);
@@ -60,13 +62,13 @@ void malloc_points(t_map *map)
 	y = 0;
 	if (map)
 	{
-		points = map->points;
 		points = (t_point **)malloc(map->height * sizeof(t_point *));
 		while (y < map->height)
 		{
 			points[y] = (t_point *)malloc(map->width * sizeof(t_point));
 			y++;
 		}
+		map->points = points;
 	}
 }
 
@@ -93,7 +95,11 @@ int	fill_map(t_map *map, t_lst *list)
 				points[y][x].z = ft_atoi(number[x]);
 			}
 			else
+			{
+				del_double_arr(number);
+				remove_points(map);
 				return (0);
+			}
 			x++;
 		}
 		y++;
@@ -113,9 +119,7 @@ int	fill_map(t_map *map, t_lst *list)
 		printf("\n");
 		y++;
 	}
-	*/
-	remove_points(map);
-	/*
+	
 	while (list)
 	{
 		printf("%s\n", list->data);
