@@ -31,7 +31,7 @@ void		draw_line(t_point *first, t_point *last, int *adr, t_default *def)
 	err = def->x + def->y;
 	while (1)
 	{
-		adr[first->x1 + first->y1 * WIDTH] = 0xFFFFF;
+		adr[first->x1 + first->y1 * WIDTH] = first->color;
 		if (first->x1 == last->x1 && first->y1 == last->y1)
 			break;
 		e2 = 2 * err;
@@ -48,32 +48,46 @@ void		draw_line(t_point *first, t_point *last, int *adr, t_default *def)
 	}
 }
 
-void		print(t_main *data, t_img *img)
+void		print(t_main *data)
 {
 	int 	x;
 	int 	y;
+	t_map	*map;
+	t_img	*img;
 
 	x = 0;
 	y = 0;
-	if (!(data->def = malloc(sizeof(t_default) * data->map.width * data->map.height)))
+	map = &data->map;
+	img = &data->image;
+	if (!(data->def = malloc(sizeof(t_default))))
 		on_crash(MALLOC_ERR);
-	data->def->zoom_x = WIDTH / data->map.width;
-	data->def->zoom_y = HEIGHT / data->map.height;
-	while (y < data->map.height)
+	data->def->zoom_x = WIDTH / map->width;
+	data->def->zoom_y = HEIGHT / map->height;
+	while (y < map->height)
 	{
 		x = 0;
-		while (x + 1 < data->map.width)
+		while (x + 1 < map->width && (map->points[y][x].color = 0xFFFFF))
 		{
-			if (y + 1 < data->map.height)
-				draw_line(&data->map.points[y][x], &data->map.points[y + 1][x], img->adr, data->def);
-			draw_line(&data->map.points[y][x], &data->map.points[y][x + 1], img->adr, data->def);
+			if (y + 1 < map->height)
+				draw_line(&map->points[y][x], &map->points[y + 1][x], img->adr, data->def);
+			draw_line(&map->points[y][x], &map->points[y][x + 1], img->adr, data->def);
 			x++;
 		}
-		if (y + 1 < data->map.height)
-			draw_line(&data->map.points[y][x], &data->map.points[y + 1][x], img->adr, data->def);
+		if (y + 1 < map->height && (map->points[y][x].color = 0xFFFFF))
+			draw_line(&map->points[y][x], &map->points[y + 1][x], img->adr, data->def);
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+}
+
+void		initialize_image(t_main *fdf)
+{
+	t_img	*image;
+
+	image = &fdf->image;
+	image->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	image->adr = (int*)mlx_get_data_addr(image->img, &image->bits,
+								   &image->size_line, &image->endian);
+	image->bits /= 8;
 }
 
 void		init_struct(t_main *data)
@@ -83,9 +97,11 @@ void		init_struct(t_main *data)
 	img = &data->image;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
-	img->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	img->adr = (int*)mlx_get_data_addr(img->img, &img->bits, &img->size_line, &img->endian);
-	print(data, img);
+	initialize_image(data);
+	print(data);
+	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
+	free(data->def);
 	mlx_hook(data->win, 17, 0L, close_app, &data);
+	mlx_hook(data->win,  2, 0, key_hook, &data);
 	mlx_loop(data->mlx);
 }

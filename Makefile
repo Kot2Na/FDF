@@ -26,7 +26,7 @@ SEDULCNIS	=	-I ./includes
 SEDULCNI	=	./includes
 SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h $(SEDULCNI)/mlx.h
 
-SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c
+SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c key_hook.c
 RIDJBO	=	objects
 RIDCRS	=	sources
 
