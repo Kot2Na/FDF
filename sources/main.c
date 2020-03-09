@@ -25,13 +25,24 @@ void    print_error(char *text, int code)
         exit(code);
 }
 
+int check_file_name(char *name)
+{
+	if (ft_strrchr(name ,'.') == NULL)
+		return (0);
+	if (ft_strcmp(ft_strrchr(name ,'.'), ".fdf") == 0)
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_main	fdf;
 	int		fd;
 
-	if (ac < 2)
+	if (ac != 2)
 		print_error("usage: ./fdf *file_name*\n", 0);
+	if (!check_file_name(av[1]))
+		print_error("Wrong file format\n", 0);
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		print_error("Cannot open the file\n", 2);
 	if (!read_map(&fdf.map, fd))

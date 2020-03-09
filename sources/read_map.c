@@ -50,7 +50,7 @@ int create_list(t_lst **list, t_map *map, int fd)
 {
 	char	*line;
 
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (!check_line(line))
 		{

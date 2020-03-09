@@ -17,13 +17,16 @@ void		clear_img(t_main *data)
 
 void		ft_destroy(t_main *data)
 {
+	t_img *image;
+
+	image = &data->image;
 //	if (data->image.img)
 //		printf("%d\n", data->image.ad);
-//	mlx_destroy_image(data->mlx, data->image.img);
-//	printf("lox\n");
-//	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, image->img);
+//	printf("ne lox\n");
+	mlx_destroy_window(data->mlx, data->win);
 	free(data->def);
-//	remove_points(&data->map);
+	remove_points(&data->map);
 	exit(0);
 }
 

@@ -23,7 +23,7 @@ void		draw_line(t_point *first, t_point *last, int *adr, t_default *def)
 	first->y1 = first->y * def->zoom_y;
 	last->x1 = last->x * def->zoom_x;
 	last->y1 = last->y * def->zoom_y;
-	printf("x=%d y=%d\nx=%d y=%d\n\n", first->x1, first->y1, last->x1, last->y1);
+	//printf("x=%d y=%d\nx=%d y=%d\n\n", first->x1, first->y1, last->x1, last->y1);
 	def->x = my_abs(last->x1 - first->x1);
 	def->y = - my_abs(last->y1 - first->y1);
 	sx = first->x1 < last->x1 ? 1 : -1;
@@ -101,7 +101,7 @@ void		init_struct(t_main *data)
 	print(data);
 	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
 	free(data->def);
-	mlx_hook(data->win, 17, 0L, close_app, &data);
-	mlx_hook(data->win,  2, 0, key_hook, &data);
+	mlx_hook(data->win, 17, 0L, close_app, data);
+	mlx_hook(data->win,  2, 0, key_hook, data);
 	mlx_loop(data->mlx);
 }
