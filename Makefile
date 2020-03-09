@@ -13,14 +13,20 @@
 NAME	=	fdf
 FLAGS	=	#-Wall -Wextra -Werror
 RIDBIL	=	libft
-KNILBIL	=	-L $(RIDBIL) -lft -lmlx -L minilibx -lm
+OSVER := $(shell uname -s)
+ifeq ($(OSVER), Linux)
+	KNILBIL = -L $(RIDBIL) -lft-lmlx -lXext -lX11 minilibx/libmlx.a -lm
+else
+	KNILBIL =  -L $(RIDBIL) -lft -framework OpenGL -framework AppKit -lm -lmlx
+endif
+#KNILBIL	=-L $(RIDBIL) -lft -lmlx -L minilibx -lm
 BIL		=	$(RIDBIL)/libft.a
 
 SEDULCNIS	=	-I ./includes 
 SEDULCNI	=	./includes
 SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h $(SEDULCNI)/mlx.h
 
-SOURCE	=	main.c read_map.c list.c fill_map.c
+SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c
 RIDJBO	=	objects
 RIDCRS	=	sources
 

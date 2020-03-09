@@ -12,6 +12,13 @@
 
 #include "fdf.h"
 
+void		*on_crash(int err)
+{
+	(err == MALLOC_ERR) ? ft_putstr("Malloc error") : 0;
+	ft_putstr("\n");
+	exit(err);
+}
+
 void    print_error(char *text, int code)
 {
         ft_putstr_fd(text, 2);
@@ -31,7 +38,6 @@ int	main(int ac, char **av)
 		print_error("Input file is invalid\n", 2);
 	close(fd);
 	init_struct(&fdf);
-	mlx_loop((&fdf)->mlx);
 	remove_points(&fdf.map);
 	ft_putstr("anime top\n");
 	return (0);

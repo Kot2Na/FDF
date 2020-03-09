@@ -62,10 +62,12 @@ void malloc_points(t_map *map)
 	y = 0;
 	if (map)
 	{
-		points = (t_point **)malloc(map->height * sizeof(t_point *));
+		if (!(points = (t_point **)malloc(map->height * sizeof(t_point *))))
+			on_crash(MALLOC_ERR);
 		while (y < map->height)
 		{
-			points[y] = (t_point *)malloc(map->width * sizeof(t_point));
+			if(!(points[y] = (t_point *)malloc(map->width * sizeof(t_point))))
+				on_crash(MALLOC_ERR);
 			y++;
 		}
 		map->points = points;
