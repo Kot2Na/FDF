@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_main_struct.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plettie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/10 18:31:48 by plettie           #+#    #+#             */
+/*   Updated: 2020/03/10 18:31:51 by plettie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int        close_app()
@@ -52,31 +64,26 @@ void		print(t_main *data)
 {
 	int 	x;
 	int 	y;
-	t_map	*map;
-	t_img	*img;
+	t_point	**points;
 
-	x = 0;
 	y = 0;
-	map = &data->map;
-	img = &data->image;
-	if (!(data->def = malloc(sizeof(t_default))))
-		on_crash(MALLOC_ERR);
-	data->def->zoom_x = WIDTH / map->width;
-	data->def->zoom_y = HEIGHT / map->height;
-	while (y < map->height)
+	points = data->map.points;
+	while (y < data->map.height)
 	{
 		x = 0;
-		while (x + 1 < map->width && (map->points[y][x].color = 0xFFFFF))
+		while (x + 1 < data->map.width && (points[y][x].color = 0xFFFFF))
 		{
-			if (y + 1 < map->height)
-				draw_line(&map->points[y][x], &map->points[y + 1][x], img->adr, data->def);
-			draw_line(&map->points[y][x], &map->points[y][x + 1], img->adr, data->def);
+			if (y + 1 < data->map.height)
+				draw_line(&points[y][x], &points[y + 1][x], data->image.adr, data->def);
+			draw_line(&points[y][x], &points[y][x + 1], data->image.adr, data->def);
 			x++;
 		}
-		if (y + 1 < map->height && (map->points[y][x].color = 0xFFFFF))
-			draw_line(&map->points[y][x], &map->points[y + 1][x], img->adr, data->def);
+		if (y + 1 < data->map.height && (points[y][x].color = 0xFFFFF))
+			draw_line(&points[y][x], &points[y + 1][x], data->image.adr, data->def);
 		y++;
 	}
+	free(data->def);
+	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 }
 
 void		initialize_image(t_main *fdf)
@@ -92,16 +99,16 @@ void		initialize_image(t_main *fdf)
 
 void		init_struct(t_main *data)
 {
-	t_img	*img;
-
-	img = &data->image;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
 	initialize_image(data);
+	if (!(data->def = malloc(sizeof(t_default) * (data->map.height + data->map.width))))
+		on_crash(MALLOC_ERR);
+	data->def->zoom_x = WIDTH / data->map.width;
+	data->def->zoom_y = HEIGHT / data->map.height;
+	data->view[PAR] = 1;
 	print(data);
-	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
-	free(data->def);
-	mlx_hook(data->win, 17, 0L, close_app, data);
+	mlx_hook(data->win, 17, 0, close_app, data);
 	mlx_hook(data->win,  2, 0, key_hook, data);
 	mlx_loop(data->mlx);
 }

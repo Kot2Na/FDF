@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <stdio.h>
+# include <math.h>
 # include "libft.h"
 # include "mlx.h"
 
@@ -23,6 +24,13 @@
 enum				e_err
 {
 	MALLOC_ERR = 0,
+};
+
+enum				e_view
+{
+	PAR = 0,
+	ISO,
+	ELEMENTS,
 };
 
 typedef struct		s_lst
@@ -72,6 +80,7 @@ typedef struct		s_main
     t_map			map;
     t_img			image;
     t_default		*def;
+    int 			view[ELEMENTS];
 }					t_main;
 
 int					read_map(t_map *map, int fd);
@@ -87,5 +96,14 @@ t_lst				*lst_new(char *content);
 void				*on_crash(int err);
 void				print(t_main *data);
 int 				key_hook(int key, void *param);
+void				ft_iso(t_main *data);
+void				ft_left(t_main *data);
+void				ft_rigth(t_main *data);
+void				ft_up(t_main *data);
+void				ft_down(t_main *data);
+int					check_max(t_main *data);
+int					check_min(t_main *data);
+void 				ft_zoom_min(t_main *data);
+void 				ft_zoom_pl(t_main *data);
 
 #endif
