@@ -17,12 +17,16 @@ void		clear_img(t_main *data)
 	int		x;
 	int		y;
 
-	y = -1;
-	while (++y < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x = 0;
+		while (x < WIDTH)
+		{
 			data->image.adr[x + y * WIDTH] = 0;
+			x++;
+		}
+		y++;
 	}
 }
 
@@ -39,7 +43,9 @@ void		ft_destroy(t_main *data)
 
 int 		key_hook(int key, void *param)
 {
-	if (key == 53)
+	t_main *lol;
+
+	if (key == ESCAPE)
 		ft_destroy(param);
 	if (key == 34)
 	{
@@ -47,37 +53,37 @@ int 		key_hook(int key, void *param)
 		//ft_iso(param);
 		print(param);
 	}
-	if (key == 123)
+	if (key == KEY_LEFT)
 	{
 		clear_img(param);
 		ft_left(param);
 		print(param);
 	}
-	if (key == 124)
+	if (key == KEY_RIGHT)
 	{
 		clear_img(param);
 		ft_rigth(param);
-		print(param);
+		//print(param);
 	}
-	if (key == 126)
+	if (key == KEY_UP)
 	{
 		clear_img(param);
 		ft_up(param);
 		print(param);
 	}
-	if (key == 125)
+	if (key == KEY_DOWN)
 	{
 		clear_img(param);
 		ft_down(param);
 		print(param);
 	}
-	if (key == 78)
+	if (key == KEY_ZOOM_DEC)
 	{
 		clear_img(param);
 		ft_zoom_min(param);
 		print(param);
 	}
-	if (key == 69)
+	if (key == KEY_ZOOM_INC)
 	{
 		clear_img(param);
 		ft_zoom_pl(param);

@@ -30,14 +30,21 @@ void		ft_rigth(t_main *data)
 {
 	int 	x;
 	int 	y;
-
-	y = -1;
-	while (++y < data->map.height)
+	t_point **points;
+	//printf("%p\n", data);
+	points = data->map.points;
+	y = 0;
+	while (y < data->map.height)
 	{
-		x = -1;
-		while (++x < data->map.width)
-			data->map.points[y][x].x += 1;
+		x = 0;
+		while (x < data->map.width)
+		{
+			points[y][x].x += 1;
+			x++;
+		}
+		y++;
 	}
+	print(data);
 }
 
 void		ft_up(t_main *data)

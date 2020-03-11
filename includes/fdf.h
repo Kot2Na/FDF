@@ -21,6 +21,14 @@
 # define WIDTH 1600
 # define HEIGHT 900
 
+# define ESCAPE 53
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
+# define KEY_LEFT 123
+# define KEY_ZOOM_INC 69
+# define KEY_ZOOM_DEC 78
+
 enum				e_err
 {
 	MALLOC_ERR = 0,

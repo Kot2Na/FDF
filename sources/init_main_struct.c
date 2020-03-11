@@ -68,9 +68,11 @@ void		print(t_main *data)
 
 	y = 0;
 	points = data->map.points;
+	//printf("%p\n", data);
 	while (y < data->map.height)
 	{
 		x = 0;
+		//printf("lol %d %d\n", points[y][x].x, points[y][x].y);
 		while (x + 1 < data->map.width && (points[y][x].color = 0xFFFFF))
 		{
 			if (y + 1 < data->map.height)
@@ -104,11 +106,11 @@ void		init_struct(t_main *data)
 	initialize_image(data);
 	if (!(data->def = malloc(sizeof(t_default) * (data->map.height + data->map.width))))
 		on_crash(MALLOC_ERR);
-	data->def->zoom_x = WIDTH / data->map.width;
-	data->def->zoom_y = HEIGHT / data->map.height;
+	data->def->zoom_x = WIDTH / data->map.width / 10;
+	data->def->zoom_y = HEIGHT / data->map.height /10;
 	data->view[PAR] = 1;
 	print(data);
+	mlx_key_hook(data->win, key_hook, data);
 	mlx_hook(data->win, 17, 0, close_app, data);
-	mlx_hook(data->win,  2, 0, key_hook, data);
 	mlx_loop(data->mlx);
 }
