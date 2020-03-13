@@ -44,7 +44,6 @@ void		ft_rigth(t_main *data)
 		}
 		y++;
 	}
-	print(data);
 }
 
 void		ft_up(t_main *data)

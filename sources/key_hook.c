@@ -63,7 +63,7 @@ int 		key_hook(int key, void *param)
 	{
 		clear_img(param);
 		ft_rigth(param);
-		//print(param);
+		print(param);
 	}
 	if (key == KEY_UP)
 	{
