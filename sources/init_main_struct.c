@@ -90,11 +90,15 @@ void		print(t_main *data)
 			//printf("\n");
 			if (y != data->map.height - 1)
 			{
+				rotate_point(&points[y][x], &data->rotate);
+				rotate_point(&points[y + 1][x], &data->rotate);
 				//printf("in %p and %p\n", &points[y][x], &points[y + 1][x]);
 				draw_line(&points[y][x], &points[y + 1][x], data->image.adr, data->def);
 			}
 			if (x != data->map.height - 1)
 			{
+				rotate_point(&points[y][x], &data->rotate);
+				rotate_point(&points[y][x + 1], &data->rotate);
 				//printf("in %p and %p\n", &points[y][x], &points[y][x + 1]);
 				draw_line(&points[y][x], &points[y][x + 1], data->image.adr, data->def);
 			}
@@ -119,15 +123,23 @@ void		initialize_image(t_main *fdf)
 	image->bits /= 8;
 }
 
+void		initialize_rotation(t_main *data)
+{
+	data->rotate.x_angle = 0;
+	data->rotate.x_angle = 0;
+	data->rotate.x_angle = 0;
+}
+
 void		init_struct(t_main *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
 	initialize_image(data);
+	initialize_rotation(data);
 	if (!(data->def = (t_default *)malloc(sizeof(t_default)/* * (data->map.height + data->map.width)*/)))
 		on_crash(MALLOC_ERR);
 	data->def->zoom_x = WIDTH / data->map.width / 10;
-	data->def->zoom_y = HEIGHT / data->map.height /10;
+	data->def->zoom_y = HEIGHT / data->map.height / 10;
 	data->view[PAR] = 1;
 	print(data);
 	mlx_key_hook(data->win, key_hook, data);

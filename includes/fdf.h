@@ -28,6 +28,12 @@
 # define KEY_LEFT 123
 # define KEY_ZOOM_INC 69
 # define KEY_ZOOM_DEC 78
+# define KEY_Q 12
+# define KEY_E 14
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_Z 6
+# define KEY_C 8
 
 enum				e_err
 {
@@ -81,6 +87,14 @@ typedef struct		s_img
 	int				endian;
 }					t_img;
 
+typedef struct		s_rotation
+{
+	double			x_angle;
+	double			y_angle;
+	double			z_angle;
+}					t_rotation;
+
+
 typedef struct		s_main
 {
 	void			*mlx;
@@ -88,9 +102,11 @@ typedef struct		s_main
     t_map			map;
     t_img			image;
     t_default		*def;
+	t_rotation		rotate;
     int 			view[ELEMENTS];
 }					t_main;
 
+void				rotate_point(t_point *point, t_rotation *angles);
 int					read_map(t_map *map, int fd);
 int					count_list(t_lst *list);
 int					fill_map(t_map *map, t_lst *list);

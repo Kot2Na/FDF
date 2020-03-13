@@ -41,10 +41,40 @@ void		ft_destroy(t_main *data)
 	exit(0);
 }
 
+/*
+void		angle_x_inc(t_main *data)
+{
+	data->rotate.x_angle += 0.05;
+}
+
+void		angle_x_dec(t_main *data)
+{
+	data->rotate.x_angle -= 0.05;
+}
+
+void		angle_y_inc(t_main *data)
+{
+	data->rotate.x_angle += 0.05;
+}
+
+void		angle_y_dec(t_main *data)
+{
+	data->rotate.x_angle -= 0.05;
+}
+
+void		angle_z_inc(t_main *data)
+{
+	data->rotate.x_angle += 0.05;
+}
+
+void		angle_z_dec(t_main *data)
+{
+	data->rotate.x_angle -= 0.05;
+}
+*/
+
 int 		key_hook(int key, void *param)
 {
-	t_main *lol;
-
 	if (key == ESCAPE)
 		ft_destroy(param);
 	if (key == 34)
@@ -82,12 +112,50 @@ int 		key_hook(int key, void *param)
 		clear_img(param);
 		ft_zoom_min(param);
 		print(param);
-	}
+	} 
 	if (key == KEY_ZOOM_INC)
 	{
 		clear_img(param);
 		ft_zoom_pl(param);
 		print(param);
 	}
+	/*
+	if (key == KEY_Q)
+	{
+		clear_img(param);
+		angle_x_inc(param);
+		print(param);
+	}
+	if (key == KEY_E)
+	{
+		clear_img(param);
+		angle_x_dec(param);
+		print(param);
+	}
+	if (key == KEY_A)
+	{
+		clear_img(param);
+		angle_y_inc(param);
+		print(param);
+	}
+	if (key == KEY_D)
+	{
+		clear_img(param);
+		angle_y_dec(param);
+		print(param);
+	}
+	if (key == KEY_Z)
+	{
+		clear_img(param);
+		angle_z_inc(param);
+		print(param);
+	}
+	if (key == KEY_C)
+	{
+		clear_img(param);
+		angle_z_dec(param);
+		print(param);
+	}
+	*/
 	return (0);
 }
