@@ -1,18 +1,6 @@
 
 #include "fdf.h"
 
-void 		ft_zoom_min(t_main *data)
-{
-	data->map.zoom += 1;
-	data->map.zoom += 1;
-}
-
-void 		ft_zoom_pl(t_main *data)
-{
-	data->map.zoom -= 1;
-	data->map.zoom -= 1;
-}
-
 int			check_max(t_main *data)
 {
 	int 	x;

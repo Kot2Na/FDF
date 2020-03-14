@@ -41,119 +41,21 @@ void		ft_destroy(t_main *data)
 	exit(0);
 }
 
-
-void		angle_x_inc(t_main *data)
-{
-	data->rotate.x_angle += 0.05;
-}
-
-void		angle_x_dec(t_main *data)
-{
-	data->rotate.x_angle -= 0.05;
-}
-
-void		angle_y_inc(t_main *data)
-{
-	data->rotate.y_angle += 0.05;
-}
-
-void		angle_y_dec(t_main *data)
-{
-	data->rotate.y_angle -= 0.05;
-}
-
-void		angle_z_inc(t_main *data)
-{
-	data->rotate.z_angle += 0.05;
-}
-
-void		angle_z_dec(t_main *data)
-{
-	data->rotate.z_angle -= 0.05;
-}
-
-
 int 		key_hook(int key, void *param)
 {
 	if (key == ESCAPE)
 		ft_destroy(param);
-	if (key == 34)
-	{
-		clear_img(param);
-		//ft_iso(param);
-		print(param);
-	}
-	if (key == KEY_LEFT)
-	{
-		clear_img(param);
-		ft_left(param);
-		print(param);
-	}
-	if (key == KEY_RIGHT)
-	{
-		clear_img(param);
-		ft_rigth(param);
-		print(param);
-	}
-	if (key == KEY_UP)
-	{
-		clear_img(param);
-		ft_up(param);
-		print(param);
-	}
-	if (key == KEY_DOWN)
-	{
-		clear_img(param);
-		ft_down(param);
-		print(param);
-	}
-	if (key == KEY_ZOOM_DEC)
-	{
-		clear_img(param);
-		ft_zoom_min(param);
-		print(param);
-	} 
-	if (key == KEY_ZOOM_INC)
-	{
-		clear_img(param);
-		ft_zoom_pl(param);
-		print(param);
-	}
-	if (key == KEY_Q)
-	{
-		clear_img(param);
-		angle_x_inc(param);
-		print(param);
-	}
-	if (key == KEY_E)
-	{
-		clear_img(param);
-		angle_x_dec(param);
-		print(param);
-	}
-	if (key == KEY_A)
-	{
-		clear_img(param);
-		angle_y_inc(param);
-		print(param);
-	}
-	if (key == KEY_D)
-	{
-		clear_img(param);
-		angle_y_dec(param);
-		print(param);
-	}
-	if (key == KEY_Z)
-	{
-		clear_img(param);
-		angle_z_inc(param);
-		print(param);
-	}
-	if (key == KEY_C)
-	{
-		clear_img(param);
-		angle_z_dec(param);
-		print(param);
-	}
+	clear_img(param);
+	if (key == KEY_LEFT || key == KEY_RIGHT
+	|| key == KEY_UP || key == KEY_DOWN)
+		change_offset(key, param);
+	if (key == KEY_ZOOM_DEC || key == KEY_ZOOM_INC)
+		change_zoom(key, param);
+	if (key == KEY_Q || key == KEY_E 
+		|| key == KEY_A || key == KEY_D
+		|| key == KEY_Z || key == KEY_C
+		|| key == KEY_ISO)
+		change_angle(key, param);
+	print(param);
 	return (0);
 }

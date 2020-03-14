@@ -22,6 +22,7 @@
 # define HEIGHT 900
 
 # define ESCAPE 53
+# define KEY_ISO 34
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_RIGHT 124
@@ -86,6 +87,7 @@ typedef struct		s_img
 
 typedef struct		s_rotation
 {
+	int				iso;
 	double			x_angle;
 	double			y_angle;
 	double			z_angle;
@@ -125,10 +127,9 @@ void				*on_crash(int err);
 void				print(t_main *data);
 int 				key_hook(int key, void *param);
 void				ft_iso(t_main *data);
-void				ft_left(t_main *data);
-void				ft_rigth(t_main *data);
-void				ft_up(t_main *data);
-void				ft_down(t_main *data);
+void				change_angle(int key, t_main *data);
+void				change_offset(int key, t_main *data);
+void				change_zoom(int key, t_main *data);
 int					check_max(t_main *data);
 int					check_min(t_main *data);
 void 				ft_zoom_min(t_main *data);

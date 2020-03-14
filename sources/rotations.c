@@ -37,6 +37,17 @@ void copy_point(t_point *dest, t_point *src)
     dest->z = src->z;
 }
 
+void    iso(t_point *point)
+{
+    int old_x;
+    int old_y;
+
+    old_x = point->x;
+    old_y = point->y;
+    point->x = (old_x - old_y) * cos(0.523599);
+    point->y = -point->z + (old_x + old_y) * sin(0.523599);
+}
+
 t_point *rotate_point(t_point *point, t_main *data)
 {
     t_point *new_point;
@@ -54,6 +65,8 @@ t_point *rotate_point(t_point *point, t_main *data)
         rotate_x(new_point, data->rotate.x_angle);
         rotate_y(new_point, data->rotate.y_angle);
         rotate_z(new_point, data->rotate.z_angle);
+        if (data->rotate.iso)
+            iso(new_point);
         new_point->x += WIDTH / 2 + data->offset.offset_x;
         new_point->y += HEIGHT / 2 + data->offset.offset_y;
     }

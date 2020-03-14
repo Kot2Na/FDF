@@ -12,22 +12,45 @@
 
 #include "fdf.h"
 
-void		ft_left(t_main *data)
+void	change_offset(int key, t_main *data)
 {
-	data->offset.offset_x -= 10;
+	if (key == KEY_LEFT)
+		data->offset.offset_x -= 10;
+	if (key == KEY_RIGHT)
+		data->offset.offset_x += 10;
+	if (key == KEY_UP)
+		data->offset.offset_y -= 10;
+	if (key == KEY_DOWN)
+		data->offset.offset_y += 10;
 }
 
-void		ft_rigth(t_main *data)
+void	change_angle(int key, t_main *data)
 {
-	data->offset.offset_x += 10;
+	if (key == KEY_Q)
+		data->rotate.x_angle += 0.05;
+	if (key == KEY_E)
+		data->rotate.x_angle -= 0.05;
+	if (key == KEY_A)
+		data->rotate.y_angle += 0.05;
+	if (key == KEY_D)
+		data->rotate.y_angle -= 0.05;
+	if (key == KEY_Z)
+		data->rotate.z_angle += 0.05;
+	if (key == KEY_C)
+		data->rotate.z_angle -= 0.05;
+	if (key == KEY_ISO)
+	{
+		if (data->rotate.iso == 1)
+			data->rotate.iso = 0;
+		else
+			data->rotate.iso = 1;
+	}
 }
 
-void		ft_up(t_main *data)
+void 	change_zoom(int key, t_main *data)
 {
-	data->offset.offset_y -= 10;
-}
-
-void		ft_down(t_main *data)
-{
-	data->offset.offset_y += 10;
+	if (key == KEY_ZOOM_INC && data->map.zoom < 100)
+		data->map.zoom += 1;
+	if (key == KEY_ZOOM_DEC && data->map.zoom > 2)
+		data->map.zoom -= 1;
 }

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static int        close_app()
+static int	close_app()
 {
 	exit(0);
 }
@@ -125,13 +125,14 @@ void		initialize_image(t_main *fdf)
 
 void		initialize_rotation(t_main *data)
 {
+	data->rotate.iso = 0;
 	data->rotate.x_angle = 0;
 	data->rotate.x_angle = 0;
 	data->rotate.x_angle = 0;
 }
 
 
-void initialize_offset(t_main *data)
+void 		initialize_offset(t_main *data)
 {
 	data->offset.offset_x = 0;
 	data->offset.offset_y = 0;
