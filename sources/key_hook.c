@@ -41,7 +41,7 @@ void		ft_destroy(t_main *data)
 	exit(0);
 }
 
-/*
+
 void		angle_x_inc(t_main *data)
 {
 	data->rotate.x_angle += 0.05;
@@ -54,24 +54,24 @@ void		angle_x_dec(t_main *data)
 
 void		angle_y_inc(t_main *data)
 {
-	data->rotate.x_angle += 0.05;
+	data->rotate.y_angle += 0.05;
 }
 
 void		angle_y_dec(t_main *data)
 {
-	data->rotate.x_angle -= 0.05;
+	data->rotate.y_angle -= 0.05;
 }
 
 void		angle_z_inc(t_main *data)
 {
-	data->rotate.x_angle += 0.05;
+	data->rotate.z_angle += 0.05;
 }
 
 void		angle_z_dec(t_main *data)
 {
-	data->rotate.x_angle -= 0.05;
+	data->rotate.z_angle -= 0.05;
 }
-*/
+
 
 int 		key_hook(int key, void *param)
 {
@@ -119,7 +119,6 @@ int 		key_hook(int key, void *param)
 		ft_zoom_pl(param);
 		print(param);
 	}
-	/*
 	if (key == KEY_Q)
 	{
 		clear_img(param);
@@ -156,6 +155,5 @@ int 		key_hook(int key, void *param)
 		angle_z_dec(param);
 		print(param);
 	}
-	*/
 	return (0);
 }

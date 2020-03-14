@@ -3,14 +3,14 @@
 
 void 		ft_zoom_min(t_main *data)
 {
-	data->def->zoom_x += 1;
-	data->def->zoom_y += 1;
+	data->map.zoom += 1;
+	data->map.zoom += 1;
 }
 
 void 		ft_zoom_pl(t_main *data)
 {
-	data->def->zoom_x -= 1;
-	data->def->zoom_y -= 1;
+	data->map.zoom -= 1;
+	data->map.zoom -= 1;
 }
 
 int			check_max(t_main *data)
@@ -24,7 +24,7 @@ int			check_max(t_main *data)
 		x = -1;
 		while (++x < data->map.width)
 		{
-			if ((data->map.points[y][x].x + 1) * data->def->zoom_x > WIDTH || (data->map.points[y][x].y + 1) * data->def->zoom_y > HEIGHT)
+			if ((data->map.points[y][x].x + 1) * data->map.zoom > WIDTH || (data->map.points[y][x].y + 1) * data->map.zoom > HEIGHT)
 				return (0);
 		}
 	}
@@ -42,7 +42,7 @@ int			check_min(t_main *data)
 		x = -1;
 		while (++x < data->map.width)
 		{
-			if ((data->map.points[y][x].x - 1) * data->def->zoom_x < 0 || (data->map.points[y][x].y - 1) * data->def->zoom_y < 0)
+			if ((data->map.points[y][x].x - 1) * data->map.zoom < 0 || (data->map.points[y][x].y - 1) * data->map.zoom < 0)
 				return (0);
 		}
 	}

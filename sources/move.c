@@ -14,62 +14,20 @@
 
 void		ft_left(t_main *data)
 {
-	int 	x;
-	int 	y;
-
-	y = -1;
-	while (check_min(data) && ++y < data->map.height)
-	{
-		x = -1;
-		while (++x < data->map.width)
-			data->map.points[y][x].x -= 1;
-	}
+	data->offset.offset_x -= 10;
 }
 
 void		ft_rigth(t_main *data)
 {
-	int 	x;
-	int 	y;
-	t_point **points;
-	//printf("%p\n", data);
-	points = data->map.points;
-	y = 0;
-	while (y < data->map.height)
-	{
-		x = 0;
-		while (x < data->map.width)
-		{
-			points[y][x].x += 1;
-			x++;
-		}
-		y++;
-	}
+	data->offset.offset_x += 10;
 }
 
 void		ft_up(t_main *data)
 {
-	int 	x;
-	int 	y;
-
-	y = -1;
-	while (check_min(data) && ++y < data->map.height)
-	{
-		x = -1;
-		while (++x < data->map.width)
-			data->map.points[y][x].y -= 1;
-	}
+	data->offset.offset_y -= 10;
 }
 
 void		ft_down(t_main *data)
 {
-	int 	x;
-	int 	y;
-
-	y = -1;
-	while (check_max(data) && ++y < data->map.height)
-	{
-		x = -1;
-		while (++x < data->map.width)
-			data->map.points[y][x].y += 1;
-	}
+	data->offset.offset_y += 10;
 }

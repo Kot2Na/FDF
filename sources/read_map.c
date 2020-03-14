@@ -70,6 +70,18 @@ int create_list(t_lst **list, t_map *map, int fd)
 	return (1);
 }
 
+int	set_zoom(int width, int height)
+{
+	if (width > 0 || height > 0)
+	{
+		if (width > height)
+			return (WIDTH / width / 2);	
+		else
+			return (HEIGHT / height / 2);
+	}
+	return (1);
+}
+
 int read_map(t_map *map, int fd)
 {
 	t_lst	*list;
@@ -87,6 +99,7 @@ int read_map(t_map *map, int fd)
 		lst_del(list);
 		return(0);
 	}
+	map->zoom = set_zoom(map->width, map->height);
 	lst_del(list);
 	return(1);
 }

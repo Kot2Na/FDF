@@ -29,9 +29,33 @@ void rotate_z(t_point *point, double angle)
     point->y = old_y * cos(angle) + old_x * sin(angle);
 }
 
-void rotate_point(t_point *point, t_rotation *angles)
+void copy_point(t_point *dest, t_point *src)
 {
-    rotate_x(point, angles->x_angle);
-    rotate_y(point, angles->y_angle);
-    rotate_z(point, angles->z_angle);
+    dest->color = src->color;
+    dest->x = src->x;
+    dest->y = src->y;
+    dest->z = src->z;
+}
+
+t_point *rotate_point(t_point *point, t_main *data)
+{
+    t_point *new_point;
+
+    new_point = NULL;
+    if (point && data)
+    {
+        new_point = (t_point *)malloc(sizeof(t_point)); //need protection
+        copy_point(new_point, point);
+        new_point->x *= data->map.zoom;
+        new_point->y *= data->map.zoom;
+        new_point->z *= data->map.zoom / 2;
+        new_point->x -= data->map.width * data->map.zoom / 2;
+        new_point->y -= data->map.height * data->map.zoom / 2;
+        rotate_x(new_point, data->rotate.x_angle);
+        rotate_y(new_point, data->rotate.y_angle);
+        rotate_z(new_point, data->rotate.z_angle);
+        new_point->x += WIDTH / 2 + data->offset.offset_x;
+        new_point->y += HEIGHT / 2 + data->offset.offset_y;
+    }
+    return (new_point);
 }

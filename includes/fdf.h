@@ -57,8 +57,6 @@ typedef struct		s_default
 {
 	int				x;
 	int				y;
-	int 			zoom_x;
-	int 			zoom_y;
 }					t_default;
 
 typedef struct  	s_point
@@ -67,14 +65,13 @@ typedef struct  	s_point
     int				y;
     int				z;
     int				color;
-    int				x1;
-    int				y1;
 }					t_point;
 
 typedef struct		s_map
 {
     int				width;
     int				height;
+	int 			zoom;
     t_point			**points;
 }					t_map;
 
@@ -94,6 +91,12 @@ typedef struct		s_rotation
 	double			z_angle;
 }					t_rotation;
 
+typedef	struct		s_offset
+{
+	int				offset_x;
+	int				offset_y;
+}					t_offset;
+
 
 typedef struct		s_main
 {
@@ -101,12 +104,13 @@ typedef struct		s_main
 	void			*win;
     t_map			map;
     t_img			image;
-    t_default		*def;
+    t_default		def;
 	t_rotation		rotate;
+	t_offset		offset;
     int 			view[ELEMENTS];
 }					t_main;
 
-void				rotate_point(t_point *point, t_rotation *angles);
+t_point				*rotate_point(t_point *point, t_main *data);
 int					read_map(t_map *map, int fd);
 int					count_list(t_lst *list);
 int					fill_map(t_map *map, t_lst *list);
