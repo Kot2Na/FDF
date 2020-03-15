@@ -12,7 +12,18 @@
 
 #include "fdf.h"
 
-void	change_offset(int key, t_main *data)
+void		iso(t_point *point)
+{
+	int		old_x;
+	int		old_y;
+
+	old_x = point->x;
+	old_y = point->y;
+	point->x = (old_x - old_y) * cos(0.523599);
+	point->y = -point->z + (old_x + old_y) * sin(0.523599);
+}
+
+void		change_offset(int key, t_main *data)
 {
 	if (key == KEY_LEFT)
 		data->offset.offset_x -= 10;
@@ -24,7 +35,7 @@ void	change_offset(int key, t_main *data)
 		data->offset.offset_y += 10;
 }
 
-void	change_angle(int key, t_main *data)
+void		change_angle(int key, t_main *data)
 {
 	if (key == KEY_Q)
 		data->rotate.x_angle += 0.05;
@@ -47,7 +58,7 @@ void	change_angle(int key, t_main *data)
 	}
 }
 
-void 	change_zoom(int key, t_main *data)
+void		change_zoom(int key, t_main *data)
 {
 	if (key == KEY_ZOOM_INC && data->map.zoom < 100)
 		data->map.zoom += 1;

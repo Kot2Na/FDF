@@ -21,15 +21,15 @@ void		*on_crash(int err)
 
 void		print_error(char *text, int code)
 {
-        ft_putstr_fd(text, 2);
-        exit(code);
+	ft_putstr_fd(text, 2);
+	exit(code);
 }
 
 int			check_file_name(char *name)
 {
-	if (ft_strrchr(name ,'.') == NULL)
+	if (ft_strrchr(name, '.') == NULL)
 		return (0);
-	if (ft_strcmp(ft_strrchr(name ,'.'), ".fdf") == 0)
+	if (ft_strcmp(ft_strrchr(name, '.'), ".fdf") == 0)
 		return (1);
 	return (0);
 }
