@@ -6,12 +6,12 @@
 #    By: crycherd <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/05 20:26:26 by crycherd          #+#    #+#              #
-#    Updated: 2020/03/08 21:41:57 by crycherd         ###   ########.fr        #
+#    Updated: 2020/03/15 12:01:30 by plettie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
-FLAGS	=	#-Wall -Wextra -Werror
+FLAGS	=	-O3
 RIDBIL	=	libft
 OSVER := $(shell uname -s)
 ifeq ($(OSVER), Linux)
@@ -26,7 +26,7 @@ SEDULCNIS	=	-I ./includes
 SEDULCNI	=	./includes
 SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h $(SEDULCNI)/mlx.h
 
-SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c key_hook.c iso.c move.c check_max.c rotations.c
+SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c key_hook.c move.c rotations.c
 RIDJBO	=	objects
 RIDCRS	=	sources
 

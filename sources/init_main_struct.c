@@ -68,6 +68,26 @@ void		draw_line(t_point *first, t_point *last, int *adr, t_default *def)
 	free(last);
 }
 
+void		ft_menu(t_main *data)
+{
+	mlx_string_put(data->mlx, data->win, 10, 730, 0x808080,
+				   "Push 'ESC' to exit");
+	mlx_string_put(data->mlx, data->win, 10, 750, 0x808080,
+				   "Push 'LEFT' and 'RIGHT' to move on axis X");
+	mlx_string_put(data->mlx, data->win, 10, 770, 0x808080,
+				   "Push 'UP' and 'DOWN' to move on axis Y");
+	mlx_string_put(data->mlx, data->win, 10, 790, 0x808080,
+				   "Push '+' and '-' to change zoom");
+	mlx_string_put(data->mlx, data->win, 10, 810, 0x808080,
+				   "Push 'I' to change  projection");
+	mlx_string_put(data->mlx, data->win, 10, 830, 0x808080,
+				   "Push 'Q' and 'E' to rotate on axis X");
+	mlx_string_put(data->mlx, data->win, 10, 850, 0x808080,
+				   "Push 'A' and 'D' to rotate on axis Y");
+	mlx_string_put(data->mlx, data->win, 10, 870, 0x808080,
+				   "Push 'Z' and 'C' to rotate on axis Z");
+}
+
 void		print(t_main *data)
 {
 	int 	x;
@@ -109,7 +129,9 @@ void		print(t_main *data)
 		y++;
 	}
 	//free(data->def);
+	mlx_clear_window(data->mlx, data->win);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	ft_menu(data);
 }
 
 void		initialize_image(t_main *fdf)
@@ -117,7 +139,7 @@ void		initialize_image(t_main *fdf)
 	t_img	*image;
 
 	image = &fdf->image;
-	image->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	image->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT - 170);
 	image->adr = (int *)mlx_get_data_addr(image->img, &image->bits,
 								   &image->size_line, &image->endian);
 	image->bits /= 8;
@@ -144,7 +166,6 @@ void		init_struct(t_main *data)
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
 	initialize_image(data);
 	initialize_rotation(data);
-	data->view[PAR] = 1;
 	print(data);
 	mlx_hook(data->win, 2, 0, key_hook, data);
 	mlx_hook(data->win, 17, 0, close_app, data);

@@ -19,13 +19,13 @@ void		*on_crash(int err)
 	exit(err);
 }
 
-void    print_error(char *text, int code)
+void		print_error(char *text, int code)
 {
         ft_putstr_fd(text, 2);
         exit(code);
 }
 
-int check_file_name(char *name)
+int			check_file_name(char *name)
 {
 	if (ft_strrchr(name ,'.') == NULL)
 		return (0);
@@ -34,7 +34,7 @@ int check_file_name(char *name)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_main	fdf;
 	int		fd;

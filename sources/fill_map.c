@@ -1,9 +1,9 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int compare_with_max(char *str)
+int			compare_with_max(char *str)
 {
-	int result;
+	int		result;
 
 	result = 1;
 	if (*str == '-' || *str == '+')
@@ -16,10 +16,10 @@ int compare_with_max(char *str)
 	return(result);
 }
 
-int check_number(char *str)
+int			check_number(char *str)
 {
-	int i;
-	int result;
+	int		i;
+	int		result;
 
 	i = 0;
 	result = 1;
@@ -36,10 +36,10 @@ int check_number(char *str)
 	return (result);
 }
 
-void remove_points(t_map *map)
+void		remove_points(t_map *map)
 {
-	t_point **points;
-	int y;
+	t_point	**points;
+	int		y;
 
 	y = 0;
 	if (map)
@@ -54,10 +54,10 @@ void remove_points(t_map *map)
 	}
 }
 
-void malloc_points(t_map *map)
+void		malloc_points(t_map *map)
 {
-	t_point **points;
-	int y;
+	t_point	**points;
+	int		y;
 
 	y = 0;
 	if (map)
@@ -74,12 +74,12 @@ void malloc_points(t_map *map)
 	}
 }
 
-int	fill_map(t_map *map, t_lst *list)
+int			fill_map(t_map *map, t_lst *list)
 {
 	char	**number;
-	t_point **points;
-	int x;
-	int y;
+	t_point	**points;
+	int		x;
+	int		y;
 
 	y = 0;
 	malloc_points(map);

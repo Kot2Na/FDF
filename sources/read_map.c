@@ -1,8 +1,8 @@
 #include "fdf.h"
 
-void	del_double_arr(char **arr)
+void		del_double_arr(char **arr)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (arr)
@@ -16,7 +16,7 @@ void	del_double_arr(char **arr)
 	}
 }
 
-void	add_to_list(char *str, int i, t_lst **list)
+void		add_to_list(char *str, int i, t_lst **list)
 {
 	char	*line;
 	char	*save;
@@ -30,10 +30,10 @@ void	add_to_list(char *str, int i, t_lst **list)
 	}
 }
 
-int	check_line(char *line)
+int			check_line(char *line)
 {
-	int i;
-	int result;
+	int		i;
+	int		result;
 
 	i = 0;
 	result = 1;
@@ -46,7 +46,7 @@ int	check_line(char *line)
 	return (result);
 }
 
-int create_list(t_lst **list, t_map *map, int fd)
+int			create_list(t_lst **list, t_map *map, int fd)
 {
 	char	*line;
 
@@ -70,7 +70,7 @@ int create_list(t_lst **list, t_map *map, int fd)
 	return (1);
 }
 
-int	set_zoom(int width, int height)
+int			set_zoom(int width, int height)
 {
 	if (width > 0 || height > 0)
 	{
@@ -82,7 +82,7 @@ int	set_zoom(int width, int height)
 	return (1);
 }
 
-int read_map(t_map *map, int fd)
+int			read_map(t_map *map, int fd)
 {
 	t_lst	*list;
 

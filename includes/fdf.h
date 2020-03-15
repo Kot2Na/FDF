@@ -41,13 +41,6 @@ enum				e_err
 	MALLOC_ERR = 0,
 };
 
-enum				e_view
-{
-	PAR = 0,
-	ISO,
-	ELEMENTS,
-};
-
 typedef struct		s_lst
 {
 	char			*data;
@@ -109,7 +102,6 @@ typedef struct		s_main
     t_default		def;
 	t_rotation		rotate;
 	t_offset		offset;
-    int 			view[ELEMENTS];
 }					t_main;
 
 t_point				*rotate_point(t_point *point, t_main *data);
@@ -126,13 +118,8 @@ t_lst				*lst_new(char *content);
 void				*on_crash(int err);
 void				print(t_main *data);
 int 				key_hook(int key, void *param);
-void				ft_iso(t_main *data);
 void				change_angle(int key, t_main *data);
 void				change_offset(int key, t_main *data);
 void				change_zoom(int key, t_main *data);
-int					check_max(t_main *data);
-int					check_min(t_main *data);
-void 				ft_zoom_min(t_main *data);
-void 				ft_zoom_pl(t_main *data);
 
 #endif
