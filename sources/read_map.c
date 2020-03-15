@@ -37,6 +37,8 @@ int			check_line(char *line)
 
 	i = 0;
 	result = 1;
+	if (line[i] == '\0')
+		 result = 0;
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]) && line[i] != '-' && line[i] != ' ' && line[i] != '+')

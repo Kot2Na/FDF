@@ -1,5 +1,4 @@
 #include "fdf.h"
-#include <stdio.h>
 
 int			compare_with_max(char *str)
 {
@@ -25,7 +24,9 @@ int			check_number(char *str)
 	result = 1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (str[i])
+	if (str[i] == '\0')
+		result = 0;
+	while (str[i] && result)
 	{
 		if (!ft_isdigit(str[i]))
 			result = 0;
@@ -108,25 +109,5 @@ int			fill_map(t_map *map, t_lst *list)
 		del_double_arr(number);
 		list = list->next;
 	}
-	/*
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			printf("x = %d, y = %d, z = %d | ", points[y][x].x, points[y][x].y, points[y][x].z);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	
-	while (list)
-	{
-		printf("%s\n", list->data);
-		list = list->next;
-	}
-	*/
 	return (1);
 }
