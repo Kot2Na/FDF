@@ -35,6 +35,10 @@
 # define KEY_D 2
 # define KEY_Z 6
 # define KEY_C 8
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_3 20
+# define KEY_4 21
 
 enum				e_err
 {
@@ -51,22 +55,25 @@ typedef struct		s_default
 {
 	int				x;
 	int				y;
+	int				sx;
+	int				sy;
+	int				err;
 }					t_default;
 
-typedef struct  	s_point
+typedef struct		s_point
 {
 	int				x;
-    int				y;
-    int				z;
-    int				color;
+	int				y;
+	int				z;
+	int				color;
 }					t_point;
 
 typedef struct		s_map
 {
-    int				width;
-    int				height;
-	int 			zoom;
-    t_point			**points;
+	int				width;
+	int				height;
+	int				zoom;
+	t_point			**points;
 }					t_map;
 
 typedef struct		s_img
@@ -92,19 +99,19 @@ typedef	struct		s_offset
 	int				offset_y;
 }					t_offset;
 
-
 typedef struct		s_main
 {
 	void			*mlx;
 	void			*win;
-    t_map			map;
-    t_img			image;
-    t_default		def;
+	t_map			map;
+	t_img			image;
+	t_default		def;
 	t_rotation		rotate;
 	t_offset		offset;
+	int				def_color;
 }					t_main;
 
-t_point				*rotate_point(t_point *point, t_main *data);
+t_point				*rot_po(t_point *point, t_main *data);
 int					read_map(t_map *map, int fd);
 int					count_list(t_lst *list);
 int					fill_map(t_map *map, t_lst *list);
@@ -117,9 +124,13 @@ char				**cnvrt_to_arr(t_lst *list);
 t_lst				*lst_new(char *content);
 void				*on_crash(int err);
 void				print(t_main *data);
-int 				key_hook(int key, void *param);
+int					key_hook(int key, void *param);
 void				change_angle(int key, t_main *data);
 void				change_offset(int key, t_main *data);
 void				change_zoom(int key, t_main *data);
+void				change_color(int key, t_main *data);
+void				iso(t_point *point);
+void				ft_menu(t_main *data);
+int					compare_with_max(char *str);
 
 #endif

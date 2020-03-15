@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plettie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/15 16:16:39 by plettie           #+#    #+#             */
+/*   Updated: 2020/03/15 16:16:41 by plettie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
-#include <stdio.h>
-
-int			compare_with_max(char *str)
-{
-	int		result;
-
-	result = 1;
-	if (*str == '-' || *str == '+')
-		str++;
-	if (ft_strlen(str) > ft_strlen("2147483648"))
-		result = 0;
-	else if (ft_strlen(str) == ft_strlen("2147483648")) 
-		if (ft_strcmp(str, "2147483647") >= 0)
-			result = 0;
-	return(result);
-}
 
 int			check_number(char *str)
 {
@@ -66,7 +62,7 @@ void		malloc_points(t_map *map)
 			on_crash(MALLOC_ERR);
 		while (y < map->height)
 		{
-			if(!(points[y] = (t_point *)malloc(map->width * sizeof(t_point))))
+			if (!(points[y] = (t_point *)malloc(map->width * sizeof(t_point))))
 				on_crash(MALLOC_ERR);
 			y++;
 		}
@@ -74,11 +70,34 @@ void		malloc_points(t_map *map)
 	}
 }
 
+int			fill_map_2(t_map *map, char **number, t_point **points, int y)
+{
+	int		x;
+
+	x = 0;
+	while (number[x])
+	{
+		if (check_number(number[x]))
+		{
+			points[y][x].x = x;
+			points[y][x].y = y;
+			points[y][x].z = ft_atoi(number[x]);
+		}
+		else
+		{
+			del_double_arr(number);
+			remove_points(map);
+			return (0);
+		}
+		x++;
+	}
+	return (1);
+}
+
 int			fill_map(t_map *map, t_lst *list)
 {
 	char	**number;
 	t_point	**points;
-	int		x;
 	int		y;
 
 	y = 0;
@@ -86,47 +105,12 @@ int			fill_map(t_map *map, t_lst *list)
 	points = map->points;
 	while (list)
 	{
-		x = 0;
 		number = ft_strsplit(list->data, ' ');
-		while (number[x])
-		{
-			if (check_number(number[x]))
-			{
-				points[y][x].x = x;
-				points[y][x].y = y;
-				points[y][x].z = ft_atoi(number[x]);
-			}
-			else
-			{
-				del_double_arr(number);
-				remove_points(map);
-				return (0);
-			}
-			x++;
-		}
+		if (!fill_map_2(map, number, points, y))
+			return (0);
 		y++;
 		del_double_arr(number);
 		list = list->next;
 	}
-	/*
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			printf("x = %d, y = %d, z = %d | ", points[y][x].x, points[y][x].y, points[y][x].z);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	
-	while (list)
-	{
-		printf("%s\n", list->data);
-		list = list->next;
-	}
-	*/
 	return (1);
 }

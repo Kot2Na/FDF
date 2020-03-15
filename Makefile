@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME	=	fdf
-FLAGS	=	-O3
+FLAGS	=	-O3 -Wall -Wextra -Werror
 RIDBIL	=	libft
 OSVER := $(shell uname -s)
 ifeq ($(OSVER), Linux)
@@ -26,7 +26,7 @@ SEDULCNIS	=	-I ./includes
 SEDULCNI	=	./includes
 SEDULCNID	=	$(SEDULCNI)/libft.h $(SEDULCNI)/fdf.h $(SEDULCNI)/mlx.h
 
-SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c key_hook.c move.c rotations.c
+SOURCE	=	main.c read_map.c list.c fill_map.c init_main_struct.c key_hook.c move.c rotations.c print.c
 RIDJBO	=	objects
 RIDCRS	=	sources
 

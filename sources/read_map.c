@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plettie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/15 15:55:23 by plettie           #+#    #+#             */
+/*   Updated: 2020/03/15 15:55:25 by plettie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void		del_double_arr(char **arr)
@@ -16,20 +28,6 @@ void		del_double_arr(char **arr)
 	}
 }
 
-void		add_to_list(char *str, int i, t_lst **list)
-{
-	char	*line;
-	char	*save;
-
-	if (list)
-	{
-		line = ft_strnew(i + 1);
-		line = ft_strncpy(line, str, i);
-		lst_to_end(list, lst_new(line));
-		free(line);
-	}
-}
-
 int			check_line(char *line)
 {
 	int		i;
@@ -39,7 +37,8 @@ int			check_line(char *line)
 	result = 1;
 	while (line[i])
 	{
-		if (!ft_isdigit(line[i]) && line[i] != '-' && line[i] != ' ' && line[i] != '+')
+		if (!ft_isdigit(line[i]) && line[i] != '-' &&
+			line[i] != ' ' && line[i] != '+')
 			result = 0;
 		i++;
 	}
@@ -55,11 +54,11 @@ int			create_list(t_lst **list, t_map *map, int fd)
 		if (!check_line(line))
 		{
 			free(line);
-			return(0);
+			return (0);
 		}
 		if (map->width == 0)
 			map->width = ft_count_wrd(line, ' ');
-		else if (map->width != ft_count_wrd(line, ' '))
+		else if (map->width != (int)ft_count_wrd(line, ' '))
 		{
 			free(line);
 			return (0);
@@ -75,7 +74,7 @@ int			set_zoom(int width, int height)
 	if (width > 0 || height > 0)
 	{
 		if (width > height)
-			return (WIDTH / width / 2);	
+			return (WIDTH / width / 2);
 		else
 			return (HEIGHT / height / 2);
 	}
@@ -91,15 +90,15 @@ int			read_map(t_map *map, int fd)
 	if (!create_list(&list, map, fd))
 	{
 		lst_del(list);
-		return(0);
+		return (0);
 	}
 	map->height = count_list(list);
 	if (map->height == 0 || !(fill_map(map, list)))
 	{
 		lst_del(list);
-		return(0);
+		return (0);
 	}
 	map->zoom = set_zoom(map->width, map->height);
 	lst_del(list);
-	return(1);
+	return (1);
 }
