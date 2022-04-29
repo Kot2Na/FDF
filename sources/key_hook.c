@@ -76,7 +76,7 @@ int			key_hook(int key, void *param)
 	if (key == KEY_LEFT || key == KEY_RIGHT
 	|| key == KEY_UP || key == KEY_DOWN)
 		change_offset(key, param);
-	if (key == KEY_ZOOM_DEC || key == KEY_ZOOM_INC)
+	if (key == KEY_ZOOM_DEC || key == KEY_ZOOM_INC || key == KEY_ZOOM_INC_2 || key == KEY_ZOOM_DEC_2)
 		change_zoom(key, param);
 	if (key == KEY_Q || key == KEY_E
 		|| key == KEY_A || key == KEY_D

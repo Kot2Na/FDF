@@ -17,7 +17,7 @@ OSVER := $(shell uname -s)
 ifeq ($(OSVER), Linux)
 	KNILBIL = -L $(RIDBIL) -lft-lmlx -lXext -lX11 minilibx/libmlx.a -lm
 else
-	KNILBIL =  -L $(RIDBIL) -lft -framework OpenGL -framework AppKit -lm -lmlx
+	KNILBIL =  -L $(RIDBIL) -L minilibx -lft -framework OpenGL -framework AppKit -lm -lmlx
 endif
 #KNILBIL	=-L $(RIDBIL) -lft -lmlx -L minilibx -lm
 BIL		=	$(RIDBIL)/libft.a

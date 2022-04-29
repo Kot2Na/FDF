@@ -64,4 +64,8 @@ void		change_zoom(int key, t_main *data)
 		data->map.zoom += 1;
 	if (key == KEY_ZOOM_DEC && data->map.zoom > 2)
 		data->map.zoom -= 1;
+	if (key == KEY_ZOOM_INC_2 && data->map.zoom < 100)
+		data->map.zoom += 1;
+	if (key == KEY_ZOOM_DEC_2 && data->map.zoom > 2)
+		data->map.zoom -= 1;
 }
